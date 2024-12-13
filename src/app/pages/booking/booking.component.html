@@ -1,0 +1,127 @@
+<div class="container-fluid pt-1">
+    <div class="row"> 
+      <div class="col-6 mt-3 text-end">
+        <button class="btn btn-warning btn-sm addNew" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"> Add New</button>
+      </div>
+    </div>
+    <div class="row mt-5 pr-0 table">
+      <div class="col-md-12"> 
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>Index</th>
+                <th> Name</th>
+                <th> City</th>
+                <th>Mobile No</th>
+                <th>Email</th>
+                <th>Car</th>
+                <th>BookingDate</th>
+                <th>Discount</th>
+                <th>Total Bill Amount</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of bookingList; track $index) {
+                <tr>
+                  <td>{{$index +1}}</td>
+                  <td>{{item.customerName}}</td>
+                  <td>{{item.customerCity}}</td>
+                  <td>{{item.mobileNo}}</td>
+                  <td>{{item.email}}</td>
+                  <td>{{item.carId}}</td>
+                  <td>{{item.bookingDate | date: 'dd-MM-yy'}}</td>
+                  <td>{{item.discount}}</td>
+                  <td>{{item.totalBillAmount}}</td>
+                  <td>
+                    <button class="btn btn-outline-danger btn-sm" (click)="onDelete(item.bookingId)">Delete</button>
+                  </td>
+                </tr>
+              }
+ 
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Booking</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body"> 
+      <div class="row">
+        <div class="col-md-12"> 
+          <form id="newBookingForm" [formGroup]="bookingForm">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="customerName">Customer Name</label>
+                  <input type="text" formControlName="CustomerName" class="form-control" id="customerName" placeholder="Enter Name" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="customerCity">Customer City</label>
+                  <input type="text" formControlName="CustomerCity" class="form-control" id="customerCity" placeholder="Enter City" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="mobileNo">Mobile No</label>
+                  <input type="text" formControlName="MobileNo" class="form-control" id="MobileNo" title="Enter Mobile Number" placeholder="Enter Mobile Number" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="email">Email</label>
+                  <input type="email" formControlName="Email" class="form-control" id="Email" title="Enter Email" placeholder="Enter Email" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                    <label for="car">Select Car</label>
+                    <select class="form-control" formControlName="CarId" id="CarId" title="Select Car">
+                        <option>Select Car</option>
+                        @for (item of carsList; track $index) {
+                          <option value="{{item.carId}}">{{item.brand}} ({{item.model}})</option>
+                        }
+                    </select>
+                  </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="bookingDate">Booking Date</label>
+                  <input type="datetime-local" formControlName="BookingDate" class="form-control" id="BookingDate" title="Enter Booking Date and Time" placeholder="Enter Booking Date and Time" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="discount">Discount</label>
+                  <input type="number" formControlName="Discount" class="form-control" id="Discount" title="Enter Discount" placeholder="Enter Discount" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="totalBillAmount">Total Bill Amount</label>
+                  <input type="number" formControlName="TotalBillAmount" class="form-control" id="TotalBillAmount" title="Enter Total Bill Amount" placeholder="Enter Total Bill Amount" />
+                </div>
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary ms-2" (click)="onAdd()">Submit</button>
+                <button type="button" class="btn btn-danger" (click)="onClear()">Clear</button>
+              </div>
+            </div>
+
+            
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div>
