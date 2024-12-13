@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject, model } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID  } from '@angular/core';
 import { CarService } from '../../services/car.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-cars',
   standalone: true,
@@ -67,5 +66,5 @@ export class CarsComponent implements OnInit {
         verticalPosition: 'top',
       });
     })}
-}
+  }
 
